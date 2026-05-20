@@ -4,6 +4,10 @@ On-device clinical reasoning AI for Apple Silicon. Takes unstructured patient
 symptoms and outputs a structured **Differential Diagnosis (DDx)**, biomedical
 justification, and recommended lab tests — entirely offline, entirely private.
 
+## Demo
+
+![MedReason Demo](assets/demo.png)
+
 ## Results
 
 MedReason produces **78% more differential diagnoses** than the base model
@@ -31,6 +35,25 @@ AVERAGE                   │  3.0   7.8  686   │  3.0  13.9   268
 **AvgJL** = average justification length per condition (chars)
 
 ## Architecture
+
+```
+┌─────────────────────────────────────────────────────────────────────┐
+│                        MedReason Pipeline                          │
+├──────────────────┬──────────────────────┬───────────────────────────┤
+│   1. DATA PREP   │    2. TRAINING       │    3. INFERENCE           │
+│                  │                      │                           │
+│  HuggingFace     │  Qwen2.5-3B (8-bit)  │  medreason-4bit (~1.8GB) │
+│  2.2M samples    │        │             │        │                  │
+│       │          │   QLoRA (800 iters)  │   System Prompt           │
+│  Filter (DDx +   │        │             │   (3-section DDx)         │
+│  clinical +      │   Fuse Adapters      │        │                  │
+│  length)         │        │             │   MLX Stream Generate     │
+│       │          │   4-bit Quantize     │        │                  │
+│  416K samples    │        │             │   Gradio UI               │
+│  train/valid     │───────>│─────────────│──>localhost:7860           │
+│  .jsonl          │                      │                           │
+└──────────────────┴──────────────────────┴───────────────────────────┘
+```
 
 | Component | Detail |
 |-----------|--------|

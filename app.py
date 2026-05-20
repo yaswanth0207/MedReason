@@ -33,6 +33,9 @@ Reference the relevant anatomy, receptor pathways, metabolic derangements,
 or inflammatory cascades that explain why these particular findings point to
 that diagnosis. Never repeat the same sentence or rationale across different
 diagnoses — each justification must be distinct and condition-specific.
+For each diagnosis write at least 2-3 sentences of biomedical justification.
+Explain the specific mechanism, the relevant risk factors from this patient's
+history, and why this diagnosis ranks where it does.
 
 ## 3. Recommended Labs & Imaging
 List the specific laboratory tests, imaging studies, or bedside assessments
@@ -42,7 +45,7 @@ explain what result you would expect if the diagnosis is correct.
 Do NOT include disclaimers, greetings, or any text outside these three sections.\
 """
 
-MAX_TOKENS = 2048
+MAX_TOKENS = 4096
 TEMPERATURE = 0.2
 TOP_P = 0.9
 REPETITION_PENALTY = 1.15

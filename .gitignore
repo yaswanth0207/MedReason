@@ -24,5 +24,8 @@ Thumbs.db
 *.swp
 *.swo
 
+# Evaluation output
+evaluation_results.json
+
 # Misc
 *.log

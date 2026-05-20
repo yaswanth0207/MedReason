@@ -1,0 +1,9 @@
+mlx==0.31.2
+mlx-metal==0.31.2
+mlx-lm[train]==0.31.3
+datasets==4.8.5
+huggingface-hub==1.15.0
+gradio==6.14.0
+safetensors==0.7.0
+sentencepiece==0.2.1
+transformers==5.8.1

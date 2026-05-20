@@ -1,0 +1,34 @@
+# MedReason – LoRA / QLoRA training configuration
+# Docs: https://github.com/ml-explore/mlx-lm/blob/main/mlx_lm/LORA.md
+
+# Using the pre-converted MLX 8-bit model (~3.5 GB download).
+# mlx_lm.lora automatically uses QLoRA when the base model is quantized.
+model: "mlx-community/Qwen2.5-3B-Instruct-8bit"
+
+data: "./data"
+train: true
+adapter_path: "./adapters"
+
+iters: 2000
+batch_size: 2
+learning_rate: 1e-5
+steps_per_report: 10
+steps_per_eval: 100
+val_batches: 50
+max_seq_length: 2048
+
+# Only compute loss on the assistant response, not the prompt.
+# Requires the ``chat`` data format (messages array in each JSONL line).
+mask_prompt: true
+
+num_layers: 8
+
+lora_parameters:
+  keys:
+    - "self_attn.q_proj"
+    - "self_attn.v_proj"
+    - "self_attn.k_proj"
+    - "self_attn.o_proj"
+  rank: 8
+  scale: 20.0
+  dropout: 0.0
